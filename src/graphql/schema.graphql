@@ -1,0 +1,24 @@
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+}
+
+type Comment {
+  _id: ID!
+  user: User!
+  recipeId: String!
+  text: String!
+}
+
+type Query {
+  comments: [Comment!]!
+  comment(id: ID!): Comment
+  getCommentsByUser(userId: ID!): [Comment!]!
+}
+
+type Mutation {
+  createComment(userId: ID!, recipeId: String!, text: String!): Comment!
+  updateComment(id: ID!, text: String!): Comment!
+  deleteComment(id: ID!): Comment!
+}

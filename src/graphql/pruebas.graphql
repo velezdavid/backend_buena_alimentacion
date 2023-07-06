@@ -1,0 +1,109 @@
+# Query
+query {
+  comments {
+    _id
+    user {
+      _id
+      name
+      email
+    }
+    recipeId
+    text
+  }
+}
+
+# tener un id de comentario he ingresarlo en la seccion de variables en este formato
+#{
+# "id": "64a6e8d5dd58c2216fd415be"
+#}
+
+query GetComment($id: ID!) {
+  comment(id: $id) {
+    _id
+    user {
+      _id
+      name
+      email
+    }
+    recipeId
+    text
+  }
+}
+
+# Mutation
+# colocar lo siguiente en la seccion de variables
+
+#{
+#  "userId": "64a6df3b5d5f793b9262af22",
+#  "recipeId": "637824",
+#  "text": "comentario de graphql"
+#}
+
+mutation CreateComment($userId: ID!, $recipeId: String!, $text: String!) {
+  createComment(userId: $userId, recipeId: $recipeId, text: $text) {
+    _id
+    user {
+      _id
+      name
+      email
+    }
+    recipeId
+    text
+  }
+}
+
+# colocar lo siguiente en la seccion de variables
+
+#{
+# "id": "64a6df485d5f793b9262af24",
+# "text": "comentario de graphql editadooooooo444444444"
+#}
+
+mutation UpdateComment($id: ID!, $text: String!) {
+  updateComment(id: $id, text: $text) {
+    _id
+    user {
+      _id
+      name
+      email
+    }
+    recipeId
+    text
+  }
+}
+
+# colocar lo siguiente en la seccion de variables
+
+#{
+# "id": "64a6e8d5dd58c2216fd415be"
+#}
+mutation DeleteComment($id: ID!) {
+  deleteComment(id: $id) {
+    _id
+    user {
+      _id
+      name
+      email
+    }
+    recipeId
+    text
+  }
+}
+
+# colocar lo siguiente en la seccion de variables
+
+#{
+# "userId": "64a6e8d5dd58c2216fd415be"
+#}
+query GetCommentsByUser($userId: ID!) {
+  getCommentsByUser(userId: $userId) {
+    _id
+    user {
+      _id
+      name
+      email
+    }
+    recipeId
+    text
+  }
+}

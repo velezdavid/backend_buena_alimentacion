@@ -7,6 +7,7 @@ import { PORT } from "./utils/constants.js";
 import routerAuth from "./microservices/auth/routes/authRoute.js";
 import routerComment from "./microservices/commets/routes/commentRoute.js";
 import setupSocket from "./config/socket.js";
+import graphql from "./graphql/index.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ connectDB()
   .then(() => {
     app.use("/api/auth", routerAuth);
     app.use("/api/comment", routerComment);
+    app.use("/graphql", graphql);
 
     setupSocket(server); // Configurar Socket.IO
 
