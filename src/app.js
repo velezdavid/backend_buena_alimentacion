@@ -2,12 +2,16 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
-import routerAuth from "./microservices/auth/routes/authRoute.js";
+import http from "http";
 import { PORT } from "./utils/constants.js";
+import routerAuth from "./microservices/auth/routes/authRoute.js";
+import routerComment from "./microservices/commets/routes/commentRoute.js";
+import setupSocket from "./config/socket.js";
 
 dotenv.config();
 
 const app = express();
+const server = http.createServer(app);
 
 // Middleware
 app.use(cors());
@@ -16,7 +20,11 @@ app.use(express.json());
 connectDB()
   .then(() => {
     app.use("/api/auth", routerAuth);
-    app.listen(PORT, () => {
+    app.use("/api/comment", routerComment);
+
+    setupSocket(server); // Configurar Socket.IO
+
+    server.listen(PORT, () => {
       console.log(`Server is running on PORT: ${PORT}`);
     });
   })
